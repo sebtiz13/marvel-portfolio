@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+     "checkJs": true,
+     "moduleResolution": "node",
+     "module": "es2015",
+     "target": "es5",
+     "paths": {
+        "@/*": ["./src/*"],
+      }
+  },
+  "include": ["./src/**/*"]
+}

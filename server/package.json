@@ -1,0 +1,27 @@
+{
+  "name": "marvel-portfolio-backend",
+  "version": "1.0.0",
+  "description": "Marvel portfolio backend",
+  "author": "Sébastien Rodriguez <sebtiz13@gmail.com>",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "lint": "eslint src/**/*",
+    "lint-fix": "eslint src/**/* --fix",
+    "serve": "nodemon"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "eslint": "^7.31.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "nodemon": "^2.0.12"
+  }
+}
