@@ -1,6 +1,6 @@
 <template>
-  <div class="characterCover" >
-    <img :src="thumbnailSrc" />
+  <div class="characterCover">
+    <img :src="thumbnailSrc">
     <div class="characterCover--info">
       <h1>{{ name }}</h1>
     </div>
@@ -33,6 +33,7 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
+  backface-visibility: hidden;
 }
 
 .characterCover img {
