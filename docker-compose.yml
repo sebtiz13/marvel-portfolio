@@ -2,7 +2,7 @@ version: '3.1'
 
 services:
   backend:
-    build: ./docker
+    image: 860319243069.dkr.ecr.us-east-2.amazonaws.com/marvel:latest
     tty: true
     ports:
       - 3000:3000
@@ -12,7 +12,7 @@ services:
       - public
 
   frontend:
-    build: ./docker
+    image: 860319243069.dkr.ecr.us-east-2.amazonaws.com/marvel:latest
     tty: true
     ports:
       - 8080:8080
