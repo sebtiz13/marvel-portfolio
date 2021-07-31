@@ -1,47 +1,59 @@
 <template>
   <div class="characterInfo">
-    <ul class="characterInfo-chapter">
-      <li
-        :class="{ active: section === 'description' }"
-        @click.stop="changeSection('description')"
-      >
-        Description
-      </li>
-      <li
-        :class="{ active: section === 'comics' }"
-        @click.stop="changeSection('comics')"
-      >
-        Comics
-      </li>
-      <li
-        :class="{ active: section === 'series' }"
-        @click.stop="changeSection('series')"
-      >
-        Series
-      </li>
-      <li
-        :class="{ active: section === 'stories' }"
-        @click.stop="changeSection('stories')"
-      >
-        Stories
-      </li>
-    </ul>
-    <div class="characterInfo-section">
-      <span v-if="section === 'description'">
-        {{ description }}
-      </span>
-      <CharacterItems
-        v-if="section === 'comics'"
-        :items="comics.items"
-      />
-      <CharacterItems
-        v-if="section === 'series'"
-        :items="series.items"
-      />
-      <CharacterItems
-        v-if="section === 'stories'"
-        :items="stories.items"
-      />
+    <div v-if="countData > 0">
+      <ul class="characterInfo-chapter">
+        <li
+          v-if="description.length > 0"
+          :class="{ active: section === 'description' }"
+          @click.stop="changeSection('description')"
+        >
+          Description
+        </li>
+        <li
+          v-if="comics.returned > 0"
+          :class="{ active: section === 'comics' }"
+          @click.stop="changeSection('comics')"
+        >
+          Comics
+        </li>
+        <li
+          v-if="series.returned > 0"
+          :class="{ active: section === 'series' }"
+          @click.stop="changeSection('series')"
+        >
+          Series
+        </li>
+        <li
+          v-if="stories.returned > 0"
+          :class="{ active: section === 'stories' }"
+          @click.stop="changeSection('stories')"
+        >
+          Stories
+        </li>
+      </ul>
+      <div class="characterInfo-section">
+        <span v-if="section === 'description'">
+          {{ description }}
+        </span>
+        <CharacterItems
+          v-if="section === 'comics'"
+          :items="comics.items"
+        />
+        <CharacterItems
+          v-if="section === 'series'"
+          :items="series.items"
+        />
+        <CharacterItems
+          v-if="section === 'stories'"
+          :items="stories.items"
+        />
+      </div>
+    </div>
+    <div
+      v-else
+      class="characterInfo-empty"
+    >
+      <h2>No data</h2>
     </div>
   </div>
 </template>
@@ -61,20 +73,30 @@ export default {
     },
     comics: {
       type: Object,
-      default: () => ({}),
+      default: () => ({ returned: 0 }),
     },
     series: {
       type: Object,
-      default: () => ({}),
+      default: () => ({ returned: 0 }),
     },
     stories: {
       type: Object,
-      default: () => ({}),
+      default: () => ({ returned: 0 }),
     },
   },
   data: () => ({
     section: 'comics',
   }),
+  computed: {
+    countData () {
+      return [
+        this.description.length,
+        this.comics.returned,
+        this.series.returned,
+        this.stories.returned,
+      ].reduce((a, b) => a + b, 0)
+    },
+  },
   methods: {
     /**
      * @param {string} section
@@ -94,8 +116,8 @@ export default {
   color: #151515;
 }
 
-.characterInfo img {
-  max-width: 100%;
+.characterInfo-empty {
+  text-align: center;
 }
 
 .characterInfo-chapter {
