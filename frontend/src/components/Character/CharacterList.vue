@@ -1,5 +1,6 @@
 <template>
   <div class="characterList">
+    <Loading v-if="loading" />
     <Character
       v-for="character in characters"
       :key="character.id"
@@ -10,11 +11,13 @@
 
 <script>
 import axios from '@/utils/axios'
+import Loading from '@/components/Loading.vue'
 import Character from '@/components/Character/Character.vue'
 
 export default {
   name: 'CharacterList',
   components: {
+    Loading,
     Character,
   },
   props: {
@@ -32,6 +35,7 @@ export default {
     },
   },
   data: () => ({
+    loading: false,
     characters: [],
   }),
   watch: {
@@ -45,6 +49,7 @@ export default {
   },
   methods: {
     async loadData () {
+      this.loading = true
       const { data: { data }, status } = await axios.get('/characters', {
         params: {
           page: this.currentPage,
@@ -55,6 +60,7 @@ export default {
         this.$emit('update:total', data.total)
         this.characters = data.results
       }
+      this.loading = false
     },
   },
 }
