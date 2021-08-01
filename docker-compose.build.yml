@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  backend:
+    image: 860319243069.dkr.ecr.us-east-2.amazonaws.com/marvel-backend:latest
+    build:
+      context: ./server
+
+  frontend:
+    image: 860319243069.dkr.ecr.us-east-2.amazonaws.com/marvel-frontend:latest
+    build:
+      context: ./frontend
+      target: frontend-production
+
